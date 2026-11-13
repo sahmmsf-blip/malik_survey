@@ -4,7 +4,7 @@
   'use strict';
   var F = window.FGU, L = F.L;
 
-  var KEY = { q1: 'b', q2: 'c', q3: 'a', q4: 'b', q5: 'c', q6: 'd', q7: 'b', q8: 'a' };
+  var KEY = { q1: 'b', q2: 'c', q3: 'a', q4: 'b', q5: 'c', q6: 'd', q7: 'c', q8: 'a' };
   var QUIZ_MAX = 8;
   var BANDS = [
     { l: ['تأسيسي (0–3)', 'Foundation (0–3)', 'Débutant (0–3)'] },
