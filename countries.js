@@ -1,0 +1,46 @@
+/* World countries: [ISO code, Arabic name, English name]. The survey sorts them alphabetically in the active language. */
+(function () {
+  'use strict';
+  var RAW = [
+    'AF|أفغانستان|Afghanistan','AL|ألبانيا|Albania','DZ|الجزائر|Algeria','AD|أندورا|Andorra','AO|أنغولا|Angola',
+    'AG|أنتيغوا وبربودا|Antigua and Barbuda','AR|الأرجنتين|Argentina','AM|أرمينيا|Armenia','AU|أستراليا|Australia','AT|النمسا|Austria',
+    'AZ|أذربيجان|Azerbaijan','BS|جزر الباهاما|Bahamas','BH|البحرين|Bahrain','BD|بنغلاديش|Bangladesh','BB|بربادوس|Barbados',
+    'BY|بيلاروسيا|Belarus','BE|بلجيكا|Belgium','BZ|بليز|Belize','BJ|بنين|Benin','BT|بوتان|Bhutan',
+    'BO|بوليفيا|Bolivia','BA|البوسنة والهرسك|Bosnia and Herzegovina','BW|بوتسوانا|Botswana','BR|البرازيل|Brazil','BN|بروناي|Brunei',
+    'BG|بلغاريا|Bulgaria','BF|بوركينا فاسو|Burkina Faso','BI|بوروندي|Burundi','CV|الرأس الأخضر|Cabo Verde','KH|كمبوديا|Cambodia',
+    'CM|الكاميرون|Cameroon','CA|كندا|Canada','CF|جمهورية أفريقيا الوسطى|Central African Republic','TD|تشاد|Chad','CL|تشيلي|Chile',
+    'CN|الصين|China','CO|كولومبيا|Colombia','KM|جزر القمر|Comoros','CG|الكونغو|Congo (Republic)','CD|الكونغو الديمقراطية|Congo (Democratic Republic)',
+    'CR|كوستاريكا|Costa Rica','CI|ساحل العاج|Côte d’Ivoire','HR|كرواتيا|Croatia','CU|كوبا|Cuba','CY|قبرص|Cyprus',
+    'CZ|التشيك|Czechia','DK|الدنمارك|Denmark','DJ|جيبوتي|Djibouti','DM|دومينيكا|Dominica','DO|جمهورية الدومينيكان|Dominican Republic',
+    'EC|الإكوادور|Ecuador','EG|مصر|Egypt','SV|السلفادور|El Salvador','GQ|غينيا الاستوائية|Equatorial Guinea','ER|إريتريا|Eritrea',
+    'EE|إستونيا|Estonia','SZ|إسواتيني|Eswatini','ET|إثيوبيا|Ethiopia','FJ|فيجي|Fiji','FI|فنلندا|Finland',
+    'FR|فرنسا|France','GA|الغابون|Gabon','GM|غامبيا|Gambia','GE|جورجيا|Georgia','DE|ألمانيا|Germany',
+    'GH|غانا|Ghana','GR|اليونان|Greece','GD|غرينادا|Grenada','GT|غواتيمالا|Guatemala','GN|غينيا|Guinea',
+    'GW|غينيا بيساو|Guinea-Bissau','GY|غيانا|Guyana','HT|هايتي|Haiti','HN|هندوراس|Honduras','HU|المجر|Hungary',
+    'IS|آيسلندا|Iceland','IN|الهند|India','ID|إندونيسيا|Indonesia','IR|إيران|Iran','IQ|العراق|Iraq',
+    'IE|أيرلندا|Ireland','IT|إيطاليا|Italy','JM|جامايكا|Jamaica','JP|اليابان|Japan','JO|الأردن|Jordan',
+    'KZ|كازاخستان|Kazakhstan','KE|كينيا|Kenya','KI|كيريباتي|Kiribati','XK|كوسوفو|Kosovo','KW|الكويت|Kuwait',
+    'KG|قيرغيزستان|Kyrgyzstan','LA|لاوس|Laos','LV|لاتفيا|Latvia','LB|لبنان|Lebanon','LS|ليسوتو|Lesotho',
+    'LR|ليبيريا|Liberia','LY|ليبيا|Libya','LI|ليختنشتاين|Liechtenstein','LT|ليتوانيا|Lithuania','LU|لوكسمبورغ|Luxembourg',
+    'MG|مدغشقر|Madagascar','MW|مالاوي|Malawi','MY|ماليزيا|Malaysia','MV|المالديف|Maldives','ML|مالي|Mali',
+    'MT|مالطا|Malta','MH|جزر مارشال|Marshall Islands','MR|موريتانيا|Mauritania','MU|موريشيوس|Mauritius','MX|المكسيك|Mexico',
+    'FM|ميكرونيزيا|Micronesia','MD|مولدوفا|Moldova','MC|موناكو|Monaco','MN|منغوليا|Mongolia','ME|الجبل الأسود|Montenegro',
+    'MA|المغرب|Morocco','MZ|موزمبيق|Mozambique','MM|ميانمار|Myanmar','NA|ناميبيا|Namibia','NR|ناورو|Nauru',
+    'NP|نيبال|Nepal','NL|هولندا|Netherlands','NZ|نيوزيلندا|New Zealand','NI|نيكاراغوا|Nicaragua','NE|النيجر|Niger',
+    'NG|نيجيريا|Nigeria','KP|كوريا الشمالية|North Korea','MK|مقدونيا الشمالية|North Macedonia','NO|النرويج|Norway','OM|عُمان|Oman',
+    'PK|باكستان|Pakistan','PW|بالاو|Palau','PS|فلسطين|Palestine','PA|بنما|Panama','PG|بابوا غينيا الجديدة|Papua New Guinea',
+    'PY|باراغواي|Paraguay','PE|بيرو|Peru','PH|الفلبين|Philippines','PL|بولندا|Poland','PT|البرتغال|Portugal',
+    'QA|قطر|Qatar','RO|رومانيا|Romania','RU|روسيا|Russia','RW|رواندا|Rwanda','KN|سانت كيتس ونيفيس|Saint Kitts and Nevis',
+    'LC|سانت لوسيا|Saint Lucia','VC|سانت فنسنت والغرينادين|Saint Vincent and the Grenadines','WS|ساموا|Samoa','SM|سان مارينو|San Marino','ST|ساو تومي وبرينسيبي|São Tomé and Príncipe',
+    'SA|السعودية|Saudi Arabia','SN|السنغال|Senegal','RS|صربيا|Serbia','SC|سيشل|Seychelles','SL|سيراليون|Sierra Leone',
+    'SG|سنغافورة|Singapore','SK|سلوفاكيا|Slovakia','SI|سلوفينيا|Slovenia','SB|جزر سليمان|Solomon Islands','SO|الصومال|Somalia',
+    'ZA|جنوب أفريقيا|South Africa','KR|كوريا الجنوبية|South Korea','SS|جنوب السودان|South Sudan','ES|إسبانيا|Spain','LK|سريلانكا|Sri Lanka',
+    'SD|السودان|Sudan','SR|سورينام|Suriname','SE|السويد|Sweden','CH|سويسرا|Switzerland','SY|سوريا|Syria',
+    'TW|تايوان|Taiwan','TJ|طاجيكستان|Tajikistan','TZ|تنزانيا|Tanzania','TH|تايلاند|Thailand','TL|تيمور الشرقية|Timor-Leste',
+    'TG|توغو|Togo','TO|تونغا|Tonga','TT|ترينيداد وتوباغو|Trinidad and Tobago','TN|تونس|Tunisia','TR|تركيا|Türkiye',
+    'TM|تركمانستان|Turkmenistan','TV|توفالو|Tuvalu','UG|أوغندا|Uganda','UA|أوكرانيا|Ukraine','AE|الإمارات العربية المتحدة|United Arab Emirates',
+    'GB|المملكة المتحدة|United Kingdom','US|الولايات المتحدة|United States','UY|أوروغواي|Uruguay','UZ|أوزبكستان|Uzbekistan','VU|فانواتو|Vanuatu',
+    'VA|الفاتيكان|Vatican City','VE|فنزويلا|Venezuela','VN|فيتنام|Vietnam','YE|اليمن|Yemen','ZM|زامبيا|Zambia','ZW|زيمبابوي|Zimbabwe'
+  ];
+  window.FGUCountries = RAW.map(function (s) { var p = s.split('|'); return { v: p[0], l: [p[1], p[2]] }; });
+})();
