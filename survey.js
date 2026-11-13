@@ -265,7 +265,7 @@
   window.FGU = {
     LANGS: LANGS, LANG_NAMES: LANG_NAMES, LANG_SHORT: LANG_SHORT, SECTIONS: SECTIONS, ALL: ALL, SCALE: SCALE,
     COURSE: ['مهارات الاتصال والتواصل', 'Communication Skills'],
-    UNI: ['اسم الجامعة', 'University name'],
+    UNI: ['جامعة فلوريدا العالمية', 'Florida Global University'],
     L: L, setLang: setLang, getLang: function () { return lang; },
     visible: visible, check: check, optLabel: optLabel,
     submit: submit, rpc: rpc, esc: esc

@@ -36,7 +36,7 @@
       'Thank you, {name}. Your answers have reached the course lecturer, and you can close this page.',
       'Merci, {name}. Vos réponses ont été transmises à l’enseignant ; vous pouvez fermer cette page.'],
     again: ['تعبئة الاستبيان لطالب آخر على هذا الجهاز', 'Fill in the survey for another student on this device', 'Remplir le questionnaire pour un autre étudiant sur cet appareil'],
-    foot: ['مادة مهارات الاتصال والتواصل · اسم الجامعة', 'Communication Skills course · University name']
+    foot: ['مادة مهارات الاتصال والتواصل · جامعة فلوريدا العالمية', 'Communication Skills course · Florida Global University']
   };
 
   var a = {}, step = -1, dir = 'fwd', stepError = false, sendError = false, sending = false, done = null;
@@ -120,7 +120,7 @@
   function render() {
     var h = '', cls = 'page' + (dir === 'back' ? ' back' : '');
     if (step < 0) {
-      h = '<section class="' + cls + '"><div class="hero"><div class="hero-seal"><img src="logo.svg" alt="' + esc(L(F.UNI)) + '"></div>' +
+      h = '<section class="' + cls + '"><div class="hero"><div class="hero-seal"><img src="logo.webp" alt="' + esc(L(F.UNI)) + '"></div>' +
         '<p class="eyebrow">' + esc(L(F.UNI)) + ' · ' + esc(L(F.COURSE)) + '</p>' +
         '<h1>' + esc(L(T.surveyTitle)) + '</h1><p class="lead">' + esc(L(T.lead)) + '</p>' +
         '<ul class="facts"><li>' + esc(L(T.fSteps)) + '</li><li>' + esc(L(T.fTime)) + '</li><li>' + esc(L(T.fReq)) + '</li></ul>' +
